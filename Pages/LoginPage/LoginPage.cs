@@ -1,10 +1,9 @@
-﻿
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Linq;
 
-namespace MarsAdvancedAutomation.Pages
+namespace MarsAdvancedAutomation.Pages.LoginPage
 {
     public class LoginPage
     {

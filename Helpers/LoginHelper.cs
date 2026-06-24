@@ -1,6 +1,6 @@
 ﻿using MarsAdvancedAutomation.Helpers;
 using MarsAdvancedAutomation.Models;
-using MarsAdvancedAutomation.Pages;
+using MarsAdvancedAutomation.Pages.LoginPage;
 using OpenQA.Selenium;
 
 namespace MarsAdvancedAutomation.Helpers

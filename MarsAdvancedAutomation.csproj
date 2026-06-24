@@ -28,11 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Screenshots\" />
-    <Folder Include="Reports\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Models\SkillsData.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>

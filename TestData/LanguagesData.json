@@ -1,0 +1,25 @@
+{
+  "Add": {
+    "Language": "English",
+    "Level": "Fluent"
+  },
+
+  "Update": {
+    "ExistingLanguage": "English",
+    "NewLanguage": "Telugu",
+    "NewLevel": "Basic"
+  },
+
+  "Delete": {
+    "Language": "English"
+  },
+
+  "MaximumLanguages": {
+    "Language1": "English",
+    "Language2": "Hindi",
+    "Language3": "Telugu",
+    "Language4": "Tamil",
+    "Language5": "Malayalam",
+    "Level": "Fluent"
+  }
+}

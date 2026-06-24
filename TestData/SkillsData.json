@@ -1,0 +1,18 @@
+{
+  "Add": {
+    "Skill": "Manual Testing",
+    "Level": "Beginner"
+  },
+
+  "Update": {
+    "ExistingSkill": "Manual Testing",
+    "NewSkill": "Automation Testing",
+    "NewLevel": "Expert"
+  },
+
+  "Delete": {
+    "Skill": "Manual Testing"
+  }
+
+
+}

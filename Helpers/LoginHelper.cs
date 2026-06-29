@@ -1,6 +1,6 @@
 ﻿using MarsAdvancedAutomation.Helpers;
-using MarsAdvancedAutomation.Models;
-using MarsAdvancedAutomation.Pages;
+using MarsAdvancedAutomation.Models.LoginModels;
+using MarsAdvancedAutomation.Pages.LoginPage;
 using OpenQA.Selenium;
 
 namespace MarsAdvancedAutomation.Helpers
@@ -18,18 +18,18 @@ namespace MarsAdvancedAutomation.Helpers
 
         public void LoginAsValidUser()
         {
-            var data = JsonReader.ReadJson<LoginTestData>(
-                @"TestData/LoginData.json");
+            var data = JsonReader.ReadJson<ValidCredentials>(
+                @"TestData/Login/ValidLogin.json");
 
-            loginPage.Login(data.Valid.Email, data.Valid.Password);
+            loginPage.Login(data.Email, data.Password);
         }
 
         public void LoginAsInvalidUser()
         {
-            var data = JsonReader.ReadJson<LoginTestData>(
-                @"TestData/LoginData.json");
+            var data = JsonReader.ReadJson<InvalidCredentials>(
+                @"TestData/Login/InValidLogin.json");
 
-            loginPage.Login(data.Invalid.Email, data.Invalid.Password);
+            loginPage.Login(data.Email, data.Password);
         }
     }
 }

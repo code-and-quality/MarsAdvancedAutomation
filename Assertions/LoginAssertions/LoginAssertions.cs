@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace MarsAdvancedAutomation.Assertions
+namespace MarsAdvancedAutomation.Assertions.LoginAssertions
 {
     public static class LoginAssertions
     {

@@ -1,4 +1,4 @@
-﻿namespace MarsAdvancedAutomation.Models
+﻿namespace MarsAdvancedAutomation.Models.LoginModels
 {
     public class LoginTestData
     {

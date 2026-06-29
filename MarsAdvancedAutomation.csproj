@@ -28,29 +28,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Screenshots\" />
-    <Folder Include="Reports\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Models\SkillsData.cs">
+    <Compile Update="Models\ProfileModels\SkillsData.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="TestData\LanguagesData.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="TestData\LoginData.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="TestData\ProfileOverviewData.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="TestData\SkillsData.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<!-- Copy all JSON files under TestData -->
+	<ItemGroup>
+		<None Update="TestData\**\*.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>

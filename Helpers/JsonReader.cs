@@ -19,17 +19,3 @@ namespace MarsAdvancedAutomation.Helpers
 }
 
 
-/*using Newtonsoft.Json;
-
-namespace MarsAdvancedAutomation.Helpers
-{
-    public static class JsonReader
-    {
-        public static T ReadJson<T>(string filePath)
-        {
-            var json = File.ReadAllText(filePath);
-
-            return JsonConvert.DeserializeObject<T>(json);
-        }
-    }
-}*/

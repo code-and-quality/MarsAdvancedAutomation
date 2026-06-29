@@ -1,4 +1,4 @@
-﻿namespace MarsAdvancedAutomation.Models
+﻿namespace MarsAdvancedAutomation.Models.ProfileModels
 {
     public class SkillsAddModel
     {

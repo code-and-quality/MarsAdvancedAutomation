@@ -1,11 +1,11 @@
 ﻿using MarsAdvancedAutomation.Base;
 using MarsAdvancedAutomation.Helpers;
-using MarsAdvancedAutomation.Models;
-using MarsAdvancedAutomation.Assertions;
 using NUnit.Framework;
 using MarsAdvancedAutomation.Pages.ProfilePage;
+using MarsAdvancedAutomation.Assertions.ProfilePageAssertions;
+using MarsAdvancedAutomation.Models.ProfileModels;
 
-namespace MarsAdvancedAutomation.Tests
+namespace MarsAdvancedAutomation.Tests.ProfileTests
 {
     public class ProfileOverviewTests : BaseTest
     {
@@ -26,7 +26,7 @@ namespace MarsAdvancedAutomation.Tests
         {
             var data =
                 JsonReader.ReadJson<ProfileOverviewData>(
-                @"TestData\ProfileOverviewData.json");
+                @"TestData\ProfileOverview\Availability.json");
 
             ProfileOverviewComponent profile =
                 new ProfileOverviewComponent(driver);
@@ -44,7 +44,7 @@ namespace MarsAdvancedAutomation.Tests
         {
             var data =
                 JsonReader.ReadJson<ProfileOverviewData>(
-                @"TestData\ProfileOverviewData.json");
+                @"TestData\ProfileOverview\Hours.json");
 
             ProfileOverviewComponent profile =
                 new ProfileOverviewComponent(driver);
@@ -60,7 +60,7 @@ namespace MarsAdvancedAutomation.Tests
         {
             var data =
                 JsonReader.ReadJson<ProfileOverviewData>(
-                    @"TestData\ProfileOverviewData.json");
+                    @"TestData\ProfileOverview\EarnTarget.json");
 
             ProfileOverviewComponent profile =
                 new ProfileOverviewComponent(driver);

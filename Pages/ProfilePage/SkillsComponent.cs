@@ -37,8 +37,18 @@ namespace MarsAdvancedAutomation.Pages.ProfilePage
 
         public void OpenSkillsTab()
         {
-            driver.FindElement(skillsTab).Click();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
+            var skillsTab = wait.Until(d =>
+                d.FindElement(By.XPath("//a[@data-tab='second']"))
+            );
+
+            skillsTab.Click();
         }
+        /*public void OpenSkillsTab()
+        {
+            driver.FindElement(skillsTab).Click();
+        }*/
 
         // -----------------------------
         // ADD SKILL
@@ -62,41 +72,49 @@ namespace MarsAdvancedAutomation.Pages.ProfilePage
             driver.FindElement(addButton).Click();
         }
 
-      
+
 
         // -----------------------------
         // UPDATE SKILL
         // -----------------------------
 
-        public void UpdateSkill(
-            string existingSkill,
-            string newSkill,
-            string newLevel)
+
+        public void UpdateSkill(string existingSkill, string newSkill, string newLevel)
         {
             OpenSkillsTab();
 
-            var row = driver.FindElement(
-                By.XPath(
-                    $"//table/tbody/tr[td[1][text()='{existingSkill}']]"));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
-            row.FindElement(
-                By.XPath(".//i[contains(@class,'write')]"))
-                .Click();
+            // 1️⃣ Wait for the row containing the existing skill
+            var row = wait.Until(d =>
+                d.FindElement(By.XPath(
+                    "//table[.//th[normalize-space()='Skill']]//tbody/tr[td[1][normalize-space()='" + existingSkill + "']]"
+                ))
+            );
 
-            var skillField =
-                driver.FindElement(skillTextbox);
+            // 2️⃣ Click the edit icon inside that row
+            row.FindElement(By.XPath(".//i[contains(@class,'write')]")).Click();
 
+            // 3️⃣ Update skill name
+            var skillField = wait.Until(d => d.FindElement(skillTextbox));
             skillField.Clear();
             skillField.SendKeys(newSkill);
 
-            new SelectElement(
-                driver.FindElement(levelDropdown))
-                .SelectByText(newLevel);
+            // 4️⃣ Update level
+            var levelSelect = new SelectElement(wait.Until(d => d.FindElement(levelDropdown)));
+            levelSelect.SelectByText(newLevel);
 
-            driver.FindElement(
-                By.XPath("//input[@value='Update']"))
-                .Click();
+            // 5️⃣ Click Update button
+            wait.Until(d => d.FindElement(By.XPath("//input[@value='Update']"))).Click();
+
+            // 6️⃣ Optional: wait for updated row to appear
+            wait.Until(d =>
+                d.FindElement(By.XPath(
+                    "//table[.//th[normalize-space()='Skill']]//tbody/tr[td[1][normalize-space()='" + newSkill + "']]"
+                ))
+            );
         }
+
 
         // -----------------------------
         // DELETE SKILL

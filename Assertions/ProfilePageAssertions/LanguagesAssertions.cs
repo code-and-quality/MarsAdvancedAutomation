@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace MarsAdvancedAutomation.Assertions
+namespace MarsAdvancedAutomation.Assertions.ProfilePageAssertions
 {
     public static class LanguagesAssertions
     {

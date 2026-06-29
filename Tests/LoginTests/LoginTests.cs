@@ -1,9 +1,9 @@
-﻿using MarsAdvancedAutomation.Assertions;
+﻿using MarsAdvancedAutomation.Assertions.LoginAssertions;
 using MarsAdvancedAutomation.Base;
 using MarsAdvancedAutomation.Helpers;
 using NUnit.Framework;
 
-namespace MarsAdvancedAutomation.Tests
+namespace MarsAdvancedAutomation.Tests.LoginTests
 {
     [TestFixture]
     public class LoginTests : BaseTest

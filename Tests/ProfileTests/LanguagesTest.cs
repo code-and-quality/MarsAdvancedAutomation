@@ -1,4 +1,4 @@
-﻿using MarsAdvancedAutomation.Assertions;
+﻿using MarsAdvancedAutomation.Assertions.ProfilePageAssertions;
 using MarsAdvancedAutomation.Base;
 using MarsAdvancedAutomation.Helpers;
 using MarsAdvancedAutomation.Models;
@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace MarsAdvancedAutomation.Tests
+namespace MarsAdvancedAutomation.Tests.ProfileTests
 {
     internal class LanguagesTest : BaseTest
     {
@@ -27,9 +27,9 @@ namespace MarsAdvancedAutomation.Tests
         //Add Language
 
         [Test]
-        public void TC3_AddLanguageTest()
+        public void AddLanguageTest()
         {
-            var json = File.ReadAllText(@"TestData\LanguagesData.json");
+            var json = File.ReadAllText(@"TestData\Languages\AddLanguage.json");
             dynamic data = JsonConvert.DeserializeObject(json);
 
             LanguagesComponent language = new LanguagesComponent(driver);
@@ -37,20 +37,20 @@ namespace MarsAdvancedAutomation.Tests
             // Act
      
             language.AddLanguage(
-                (string)data.Add.Language,
-                (string)data.Add.Level
+                (string)data.Language,
+                (string)data.Level
             );
 
            
 
             // Track test data
-            TestDataManager.AddLanguage((string)data.Add.Language);
+            TestDataManager.AddLanguage((string)data.Language);
 
             // Assert
 
             LanguagesAssertions.VerifyLanguageAdded(
-                                 language.IsLanguagePresent((string)data.Add.Language),
-                                     (string)data.Add.Language); 
+                                 language.IsLanguagePresent((string)data.Language),
+                                     (string)data.Language); 
           
         }
 
@@ -60,34 +60,38 @@ namespace MarsAdvancedAutomation.Tests
 
         public void UpdateLanguageTest()
         {
-            var json = File.ReadAllText(@"TestData\LanguagesData.json");
+           
+            var json = File.ReadAllText(@"TestData\Languages\AddLanguage.json");
             dynamic data = JsonConvert.DeserializeObject(json);
 
             LanguagesComponent language = new LanguagesComponent(driver);
 
             // Arrange
             language.AddLanguage(
-                (string)data.Add.Language,
-                (string)data.Add.Level
+                (string)data.Language,
+                (string)data.Level
             );
+
+            var json1 = File.ReadAllText(@"TestData\Languages\UpdateLanguage.json");
+            dynamic data1 = JsonConvert.DeserializeObject(json1);
 
             // Act
             language.UpdateLanguage(
-                (string)data.Update.ExistingLanguage,
-                (string)data.Update.NewLanguage,
-                (string)data.Update.NewLevel
+                (string)data1.ExistingLanguage,
+                (string)data1.NewLanguage,
+                (string)data1.NewLevel
             );
 
 
             // Track test data
-            TestDataManager.AddLanguage((string)data.Update.NewLanguage);
+            TestDataManager.AddLanguage((string)data.NewLanguage);
 
             // Assert
 
 
             LanguagesAssertions.VerifyLanguageUpdated(
-                             language.IsLanguagePresent((string)data.Update.NewLanguage),
-                                 (string)data.Update.NewLanguage);
+                             language.IsLanguagePresent((string)data1.NewLanguage),
+                                 (string)data1.NewLanguage);
          
         }
 
@@ -97,7 +101,7 @@ namespace MarsAdvancedAutomation.Tests
        
         public void DeleteLanguageTest()
         {
-            var json = File.ReadAllText(@"TestData\LanguagesData.json");
+            var json = File.ReadAllText(@"TestData\Languages\DeleteLanguage.json");
             dynamic data = JsonConvert.DeserializeObject(json);
 
             LanguagesComponent language = new LanguagesComponent(driver);
@@ -105,20 +109,20 @@ namespace MarsAdvancedAutomation.Tests
 
             // Arrange
             language.AddLanguage(
-                (string)data.Add.Language,
-                (string)data.Add.Level
+                (string)data.Language,
+                (string)data.Level
             );
 
             // Act
             language.DeleteLanguage(
-                (string)data.Delete.Language
+                (string)data.Language
             );
 
             // Assert
 
             LanguagesAssertions.VerifyLanguageDeleted(
-                                language.IsLanguagePresent((string)data.Delete.Language),
-                                     (string)data.Delete.Language);
+                                language.IsLanguagePresent((string)data.Language),
+                                     (string)data.Language);
           
         }
 
@@ -127,21 +131,21 @@ namespace MarsAdvancedAutomation.Tests
         [Test]
         public void PreventDuplicateLanguageTest()
         {
-            var json = File.ReadAllText(@"TestData\LanguagesData.json");
+            var json = File.ReadAllText(@"TestData\Languages\DuplicateLanguage.json");
             dynamic data = JsonConvert.DeserializeObject(json);
 
             LanguagesComponent language = new LanguagesComponent(driver);
 
             // Add first time
             language.AddLanguage(
-                (string)data.Add.Language,
-                (string)data.Add.Level
+                (string)data.Language,
+                (string)data.Level
             );
 
             // Add same language again
             language.AddLanguage(
-                (string)data.Add.Language,
-                (string)data.Add.Level
+                (string)data.Language,
+                (string)data.Level
             );
 
 
@@ -150,7 +154,7 @@ namespace MarsAdvancedAutomation.Tests
             string actualMessage = toast.GetMessage(By.CssSelector(".ns-box-inner"));
 
             // Track test data
-            TestDataManager.AddLanguage((string)data.Add.Language);
+            TestDataManager.AddLanguage((string)data.Language);
 
             //Assert
 
@@ -161,33 +165,32 @@ namespace MarsAdvancedAutomation.Tests
         // Prevent Morethan 4 Languages
 
         [Test]
+     
         public void PreventMoreThanFourLanguagesTest()
         {
-            var json = File.ReadAllText(@"TestData\LanguagesData.json");
+
+            var json = File.ReadAllText(@"TestData\Languages\MaximumLanguages.json");
             dynamic data = JsonConvert.DeserializeObject(json);
 
             LanguagesComponent language = new LanguagesComponent(driver);
 
-            for (int i = 1; i <= 4; i++)
+            foreach (var item in data)
             {
-                string languageName = (string)data.Add.Language + i;
+                string languageName = (string)item.Language;
+                string level = (string)item.Level;
 
-                language.AddLanguage(
-                    languageName,
-                    (string)data.Add.Level
-                );
+                language.AddLanguage(languageName, level);
 
                 TestDataManager.AddLanguage(languageName);
             }
-
             LanguagesAssertions.VerifyMaximumLanguagesReached(
-                language.IsAddNewButtonVisible()
-            );
+                 language.IsAddNewButtonVisible()
+             );
+
         }
 
-     
-
         [TearDown]
+
         public void Cleanup()
         {
             foreach (var language in TestDataManager.LanguagesAdded)

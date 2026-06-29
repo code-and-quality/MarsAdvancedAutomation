@@ -57,28 +57,7 @@ namespace MarsAdvancedAutomation.Pages.ProfilePage
                 d.FindElements(By.XPath($"//table//td[contains(text(),'{language}')]")).Count > 0
             );
         }
-        /*public void AddLanguage(string language, string level)
-        {
-            driver.FindElement(LanguageNewBtn).Click();
-
-         
-
-            driver.FindElement(languageInput).SendKeys(language);
-
-            new SelectElement(driver.FindElement(levelDropdown))
-                .SelectByText(level);
-
-            driver.FindElement(addBtn).Click();
-
-            //  WAIT HERE
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-
-            wait.Until(d =>
-                d.FindElements(By.XPath($"//table//td[contains(text(),'{language}')]"))
-                  .Count > 0
-            );
-        }
-        */
+    
         public string GetAddedLanguage()
         {
             var element = driver.FindElement(
@@ -190,8 +169,10 @@ namespace MarsAdvancedAutomation.Pages.ProfilePage
         //----------Add New Button Available------------------//
         public bool IsAddNewButtonVisible()
         {
-            return driver.FindElements(LanguageNewBtn).Count > 0;
+            return driver.FindElements(By.XPath("//div[@data-tab='first']//div[text()='Add New']"))
+                         .Count > 0;
         }
+      
     }
 }
 
